@@ -1,0 +1,38 @@
+<div class="inventory-pages">
+    <div class="center-it"><h1>Add to the Stacks!</h1></div>
+    <div class="row mtop-50 center-it">
+        <div class="col-md-4">
+            <button class="btn btn-success" id="just_one">Add One Book</button>
+        </div>
+        <div class="col-md-8">
+            <button class="btn btn-warning" id="many_books">Add Multiple Books by Author</button>
+        </div>
+    </div>
+    <div class="invisible mtop-50 row" id="one_book">
+        <div class="col-md-6 col-md-offset-3">
+            <%= form_tag('/confirm_book') do %>
+                <p><%= text_field_tag :title, nil, placeholder: "Title" %></p>
+                <p><%= text_field_tag :author, nil, placeholder: "Author" %></p>
+                <p><%= text_field_tag :color, nil, placeholder: "Color of book" %></p>
+                <p><%= select_tag "shelves", options_from_collection_for_select(@shelves, "id", "designation"), prompt: "Choose a Shelf"%></p>
+                <div class="center-it"><p><%= submit_tag "Shelve It!", class: "btn btn-success" %></p></div>
+            <% end %>
+        </div>
+    </div>
+    <div class="invisible" id="books_by_author">
+        Books by author
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+     $('#just_one').click(function(){
+        $('#one_book').toggleClass('invisible');
+        $('#books_by_author').addClass('invisible');
+     });
+     $('#many_books').click(function(){
+        $('#books_by_author').toggleClass('invisible');
+        $('#one_book').addClass('invisible');
+     });
+    });
+</script>
