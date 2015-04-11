@@ -1,0 +1,7 @@
+<%= form_tag('/enter_book') do %>
+    <p><%= text_field_tag :title, nil, placeholder: "Title", autofocus: true %></p>
+    <p><%= text_field_tag :author, nil, placeholder: "Author" %></p>
+    <p><%= text_field_tag :color, nil, placeholder: "Color of book" %></p>
+    <p><%= select_tag :shelf_id, options_from_collection_for_select(@shelves, "id", "designation"), prompt: "Choose a Shelf"%></p>
+    <div><p><%= submit_tag "Shelve It!", class: "btn btn-success" %></p></div>
+<% end %>

@@ -1,0 +1,27 @@
+<% if @author_entry == true %>
+    <div class="mtop-50 row" id="books_by_author">
+        <div class="col-md-6 col-md-offset-3 center-it">
+            <%= form_tag('/enter_book') do %>
+                <p><%= text_field_tag :author, @author_name %></p>
+                <p><%= text_field_tag :title, nil, placeholder: "Next Book Title", autofocus: true %></p>
+                <p><%= text_field_tag :color, nil, placeholder: "Color of book" %></p>
+                <p><%= select_tag :shelf_id, options_from_collection_for_select(@shelves, "id", "designation"), prompt: "Choose a Shelf"%></p>
+                <p class="invisible"><%= text_field_tag :author_entry, "true" %></p>
+                <div><p><%= submit_tag "Enter Next Title", class: "btn btn-warning" %></p></div>
+            <% end %>
+        </div>
+    </div>
+<% else %>
+    <div class="invisible mtop-50 row" id="books_by_author">
+        <div class="col-md-6 col-md-offset-3 center-it">
+            <%= form_tag('/enter_book') do %>
+                <p><%= text_field_tag :author, nil, placeholder: "Author", autofocus: true %></p>
+                <p><%= text_field_tag :title, nil, placeholder: "First Book Title" %></p>
+                <p><%= text_field_tag :color, nil, placeholder: "Color of book" %></p>
+                <p><%= select_tag :shelf_id, options_from_collection_for_select(@shelves, "id", "designation"), prompt: "Choose a Shelf"%></p>
+                <p class="invisible"><%= text_field_tag :author_entry, "true" %></p>
+                <div><p><%= submit_tag "Start Entering Titles", class: "btn btn-warning" %></p></div>
+            <% end %>
+        </div>
+    </div>
+<% end %>

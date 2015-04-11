@@ -1,26 +1,48 @@
 <div class="inventory-pages">
-    <div class="center-it"><h1>Add to the Stacks!</h1></div>
-    <div class="row mtop-50 center-it">
-        <div class="col-md-4">
-            <button class="btn btn-success" id="just_one">Add One Book</button>
+    <div class="enter-books">
+        <div class="center-it"><h1>Add to the Stacks!</h1></div>
+        <div class="row mtop-50 center-it">
+            <div class="col-md-4">
+                <button class="btn btn-success" id="just_one">Add One Book</button>
+            </div>
+            <div class="col-md-8">
+                <button class="btn btn-warning" id="many_books">Add Multiple Books by Author</button>
+            </div>
         </div>
-        <div class="col-md-8">
-            <button class="btn btn-warning" id="many_books">Add Multiple Books by Author</button>
+        <div class="invisible mtop-50 row" id="one_book">
+            <div class="col-md-6 col-md-offset-3 center-it">
+                <%= render 'onebook' %>
+            </div>
         </div>
+        
+        <%= render 'authorbooks.html.erb' %>
     </div>
-    <div class="invisible mtop-50 row" id="one_book">
-        <div class="col-md-6 col-md-offset-3">
-            <%= form_tag('/confirm_book') do %>
-                <p><%= text_field_tag :title, nil, placeholder: "Title" %></p>
-                <p><%= text_field_tag :author, nil, placeholder: "Author" %></p>
-                <p><%= text_field_tag :color, nil, placeholder: "Color of book" %></p>
-                <p><%= select_tag "shelves", options_from_collection_for_select(@shelves, "id", "designation"), prompt: "Choose a Shelf"%></p>
-                <div class="center-it"><p><%= submit_tag "Shelve It!", class: "btn btn-success" %></p></div>
-            <% end %>
+
+    <div class="show-books mtop-50">
+        <div class="center-it">
+            <span class="pointy" id="show_books">Show Books?</span>
         </div>
-    </div>
-    <div class="invisible" id="books_by_author">
-        Books by author
+        <div class="center-it">
+            <span class="invisible pointy" id="hide_books">Hide Books?</span>
+        </div>
+        <div class="invisible" id="book_table">
+            <table class="table">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Color</th>
+                    <th>Shelf</th>
+                </tr>
+                <% @books.each do |book| %>
+                    <tr>
+                        <td><%= book.title %></td>
+                        <td><%= book.author %></td>
+                        <td><%= book.color %></td>
+                        <td><%= book.shelf.designation %></td>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -33,6 +55,16 @@
      $('#many_books').click(function(){
         $('#books_by_author').toggleClass('invisible');
         $('#one_book').addClass('invisible');
+     });
+     $('#show_books').click(function(){
+        $('#book_table').removeClass('invisible');
+        $('#hide_books').removeClass('invisible');
+        $(this).addClass('invisible');
+     });
+     $('#hide_books').click(function(){
+        $('#book_table').addClass('invisible');
+        $('#show_books').removeClass('invisible');
+        $(this).addClass('invisible');
      });
     });
 </script>

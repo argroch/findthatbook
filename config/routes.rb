@@ -2,12 +2,9 @@ Rails.application.routes.draw do
   root 'inventory#index'
 
   get 'enter_book' => 'inventory#enter_book'
+  post 'enter_book' => 'inventory#enter_book'
 
   get 'find_book' => 'inventory#find_book'
-  
-  post 'confirm_book' => 'inventory#confirm_book'
-  
-  post 'confirm_author_books' => 'inventory#confirm_author_books'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
