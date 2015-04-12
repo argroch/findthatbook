@@ -1,2 +1,45 @@
-<h1>Inventory#find_book</h1>
-<p>Find me in app/views/inventory/find_book.html.erb</p>
+<div class="inventory-pages">
+    <div class="find-books center-it">
+        <h2>Search by...</h2>
+        <div class="mtop-50">
+            <%= form_tag('find_book') do %>
+                <%= text_field_tag :title, nil, placeholder: "Book Title" %> <%= submit_tag "Check Shelves", class: "btn btn-info" %>
+            <% end %>
+        </div>
+        <div class="mtop-50">
+            <%= form_tag('find_book') do %>
+                <%= text_field_tag :author, nil, placeholder: "Author" %> <%= submit_tag "Check Shelves", class: "btn btn-success" %>
+            <% end %>
+        </div>
+    </div>
+    <% if @showtime == true %>
+        <div class="show-books mtop-50 center-it">
+            <% if @search_type == "by author" %>
+                <table class="table">
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Color</th>
+                        <th>Shelf</th>
+                    </tr>
+                    <% @books.each do |book| %>
+                        <tr>
+                            <td><strong><%= book.title %></strong></td>
+                            <td><%= book.author %></td>
+                            <td><%= book.color %></td>
+                            <td><strong><%= book.shelf.designation %></strong></td>
+                        </tr>
+                    <% end %>
+                </table>
+            <% else %>
+                <div>
+                    <h5>You're looking for...</h5>
+                    <h3><%= @book.title %></h3>
+                    <p>by <%= @book.author %></p>
+                    <p>It's located on <strong>Shelf <%= @book.shelf.designation %></strong></p>
+                </div>
+            <% end %>
+            <p><%= link_to "Find Another", find_book_path, class: "btn btn-danger" %></p>
+        </div>
+    <% end %>
+</div>

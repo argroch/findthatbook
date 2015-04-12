@@ -22,6 +22,17 @@ class InventoryController < ApplicationController
   end
 
   def find_book
+    @showtime = false
+    @search_type = ""
+    if params[:title] != nil
+      @book = Book.find_by(title: params[:title])
+      @showtime = true
+      @search_type = "by title"
+    elsif params[:author] != nil
+      @books = Book.where(author: params[:author])
+      @showtime = true
+      @search_type = "by author"
+    end
   end
   
   def confirm_book

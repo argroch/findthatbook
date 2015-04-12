@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'enter_book' => 'inventory#enter_book'
 
   get 'find_book' => 'inventory#find_book'
+  post 'find_book' => 'inventory#find_book'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
